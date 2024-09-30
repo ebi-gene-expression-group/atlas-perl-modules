@@ -129,8 +129,8 @@ sub fetch_experiment_genes_from_sc_atlasdb {
     my ( $self, $logger ) = @_;
 
     my $query = "
-        SELECT scmg.gene_id, scmg.experiment_accession, e.species, e.pubmed_ids from scxa_marker_genes scmg, experiment e WHERE scmg.experiment_accession = e.accession
-        AND scmg.marker_probability <="."'$ENV{'MARKER_GENE_PVAL'}'" ."AND e.private = 'FALSE'";
+        SELECT scgmg.gene_id, scg.experiment_accession, e.species, e.pubmed_ids from scxa_cell_group_marker_genes scgmg, scxa_cell_group scg, experiment e WHERE scg.experiment_accession = e.accession
+        AND scgmg.cell_group_id = scg.id AND scgmg.marker_probability <="."'$ENV{'MARKER_GENE_PVAL'}'" ."AND e.private = 'FALSE'";
 
     my $atlasDBH = $self->get_dbh;
 
