@@ -4,7 +4,6 @@ package EBI::FGPT::Converter::GEO::GeoExperiment;
 
 use LWP::Simple qw($ua get);
 use XML::XPath;
-use LWP::UserAgent::ProxyAny;
 use HTTP::Status;
 use File::Spec;
 use File::Temp qw(tempfile);
