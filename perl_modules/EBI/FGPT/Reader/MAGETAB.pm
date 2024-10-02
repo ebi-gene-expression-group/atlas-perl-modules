@@ -1051,7 +1051,7 @@ sub _check_files_exist
 	{
 		my @comments = $self->get_magetab->get_comments;
 		my @type_comments = grep { $_->get_name eq "AEExperimentType" } @comments;
-		$is_seq = grep { $_->get_value =~ /seq/i } @type_comments;
+		$is_seq = grep { $_->get_value =~ /seq|-C$|CUT&RUN/i } @type_comments;
 	}
 
 	$self->info("Checking for presence of data files");
