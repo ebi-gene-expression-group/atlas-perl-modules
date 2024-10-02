@@ -43,7 +43,7 @@ AUTOSUBS_CURATOR_EMAIL:   fgsubs@ebi.ac.uk
 
 HTTP_PROXY:               
 
-AE_ARRAYDESIGN_LIST:      'http://peach.ebi.ac.uk:8480/api/all-arrays.txt'
+AE_ARRAYDESIGN_LIST:      'http://codon-plantain-01:8480/arrays'
 
 MAX_LWP_DOWNLOAD: 10104857600
 
