@@ -40,7 +40,7 @@ sub fetch_experiment_titles_from_atlasdb {
         select distinct ACCESSION, TITLE
         from EXPERIMENT
         where ACCESSION in ($accessions4query)
-        and PRIVATE = 'F'
+        and PRIVATE = 'false'
         order by ACCESSION";
 
     # Get the database handle.
@@ -85,7 +85,7 @@ sub fetch_human_degene_info_from_atlasdb {
         from VW_DIFFANALYTICS
         inner join EXPERIMENT
         on EXPERIMENT = ACCESSION
-        where PRIVATE = 'F'
+        where PRIVATE = 'false'
         and ORGANISM = 'Homo sapiens'
         order by IDENTIFIER, EXPERIMENT, CONTRASTID";
 
@@ -134,7 +134,7 @@ sub fetch_last_processing_dates_from_atlasdb {
         select ACCESSION, to_char( LAST_UPDATE, 'YYYY-MM-DD HH24:MI:SS' )
         from EXPERIMENT
         where ACCESSION in ($accessions4query)
-        and PRIVATE = 'F'";
+        and PRIVATE = 'false'";
 
     my $atlasDBH = $self->get_dbh
         or $logger->logdie( "Could not get database handle: $DBI::errstr" );
@@ -222,7 +222,7 @@ sub fetch_degenes_experiments_contrasts_from_atlasdb {
         from VW_DIFFANALYTICS
         inner join EXPERIMENT
         on EXPERIMENT = ACCESSION
-        where PRIVATE = 'F'
+        where PRIVATE = 'false'
         order by IDENTIFIER, EXPERIMENT, CONTRASTID";
 
     my $atlasDBH = $self->get_dbh;
@@ -268,7 +268,7 @@ sub fetch_baseline_genes_experiments_assaygroups_from_atlasdb {
         from RNASEQ_BSLN_EXPRESSIONS
         inner join EXPERIMENT
         on EXPERIMENT = ACCESSION
-        where PRIVATE = 'F'
+        where PRIVATE = 'false'
         and EXPRESSION > 0.5
         order by IDENTIFIER, EXPERIMENT, ASSAYGROUPID";
 
@@ -312,7 +312,7 @@ sub fetch_differential_experiment_info_from_atlasdb {
 
     my $query = "
         select accession, last_update from experiment
-        where private = 'F'
+        where private = 'false'
         and type like '%DIFFERENTIAL'";
 
     my $atlasDBH = $self->get_dbh;
@@ -351,7 +351,7 @@ sub fetch_baseline_experiment_info_from_atlasdb {
 
     my $query = "
         select accession, last_update from experiment
-        where private = 'F'
+        where private = 'false'
         and type like '%BASELINE'";
 
     my $atlasDBH = $self->get_dbh;
