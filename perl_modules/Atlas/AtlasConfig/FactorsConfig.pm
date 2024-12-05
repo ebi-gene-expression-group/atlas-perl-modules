@@ -248,16 +248,17 @@ sub _read_gxa_license {
         );
     }
 
-    my $atlasProdDir = $ENV{ "ATLAS_PROD" };
-
-    unless( $atlasProdDir ) {
-        $logger->logdie( 
-            "ATLAS_PROD environment variable is not set. Cannot locate GXA license file."
-        );
+    unless ( -r $gxaLicenseFile ) {
+        # only read in the previous way merging $atlasProdDir if $gxaLicenseFile doesn't get a complete file
+        my $atlasProdDir = $ENV{ "ATLAS_PROD" };
+        unless( $atlasProdDir ) {
+            $logger->logdie( 
+                "ATLAS_PROD environment variable is not set. Cannot locate GXA license file."
+            );
+        }
+        $gxaLicenseFile = File::Spec->catfile( $atlasProdDir, $gxaLicenseFile );
     }
-
-    $gxaLicenseFile = File::Spec->catfile( $atlasProdDir, $gxaLicenseFile );
-
+    
     unless( -r $gxaLicenseFile ) {
         $logger->logdie(
             "Cannot read ",
